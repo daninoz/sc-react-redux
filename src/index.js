@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import configureStore from './stores/configureStore';
 import * as actions from './actions';
 import Stream from './components/Stream';
@@ -27,6 +28,9 @@ store.dispatch(actions.setTracks(tracks));
  in the element #app
  */
 ReactDOM.render(
-    <Stream />,
+    // We wrap our components in the Provider
+    <Provider store={store}>
+      <Stream />
+    </Provider>,
     document.getElementById('app')
 );

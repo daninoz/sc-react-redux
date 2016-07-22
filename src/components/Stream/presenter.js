@@ -6,15 +6,21 @@ import React from "react";
 
  In this case it receives props (state) and returns a view.
  */
-function Stream({ tracks = []}) {
+function Stream({ tracks = [], onAuth }) {
   return (
       <div>
-        {
-          tracks.map((track, key) => {
-            // List of components should have a unique key
-            return <div className="track" key={key}>{track.title}</div>;
-          })
-        }
+        <div>
+          <button onClick={onAuth} type="button">Login</button>
+        </div>
+        <br />
+        <div>
+          {
+            tracks.map((track, key) => {
+              // List of components should have a unique key
+              return <div className="track" key={key}>{track.title}</div>;
+            })
+          }
+        </div>
       </div>
   );
 }

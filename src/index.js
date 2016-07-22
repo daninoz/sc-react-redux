@@ -1,8 +1,13 @@
+import SC from 'soundcloud';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from './stores/configureStore';
 import * as actions from './actions';
+import App from './components/App';
+import Callback from './components/Callback';
 import Stream from './components/Stream';
 
 // This is our Stream component props
@@ -23,6 +28,9 @@ const store = configureStore();
 // The store is going to let the rootReducer take care of it
 store.dispatch(actions.setTracks(tracks));
 
+// Syncs the router history with the store so we can react to path changes
+const history = syncHistoryWithStore(browserHistory, store);
+
 /*
  We render our component Track with the props tracks
  in the element #app
@@ -30,7 +38,13 @@ store.dispatch(actions.setTracks(tracks));
 ReactDOM.render(
     // We wrap our components in the Provider
     <Provider store={store}>
-      <Stream />
+      <Router history={history}>
+        <Route path="/" component={App}>
+          <IndexRoute component={Stream} />
+          <Route path="/" component={Stream} />
+          <Route path="/callback" component={Callback} />
+        </Route>
+      </Router>
     </Provider>,
     document.getElementById('app')
 );

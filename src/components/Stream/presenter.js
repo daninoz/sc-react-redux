@@ -6,11 +6,17 @@ import React from "react";
 
  In this case it receives props (state) and returns a view.
  */
-function Stream({ tracks = [], onAuth }) {
+function Stream({ user, tracks = [], onAuth }) {
   return (
       <div>
         <div>
-          <button onClick={onAuth} type="button">Login</button>
+          {
+            // If the user is present we display the username
+            // If not we display a login button
+            user ?
+                <div>{ user.username }</div> :
+                <button onClick={onAuth} type="button">Login</button>
+          }
         </div>
         <br />
         <div>

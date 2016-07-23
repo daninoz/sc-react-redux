@@ -6,8 +6,10 @@ import Stream from './presenter';
 
 // This function passed to connect updates the props once the redux store is updated
 function mapStateToProps(state) {
+  const { user } = state.auth;
   const tracks = state.track;
   return {
+    user,
     tracks
   };
 }

@@ -7,10 +7,11 @@ import Stream from './presenter';
 // This function passed to connect updates the props once the redux store is updated
 function mapStateToProps(state) {
   const { user } = state.auth;
-  const tracks = state.track;
+  const { tracks, activeTrack } = state.track;
   return {
     user,
-    tracks
+    tracks,
+    activeTrack
   };
 }
 
@@ -18,7 +19,8 @@ function mapStateToProps(state) {
 //In this case we bind the action auth with the prop function onAuth
 function mapDispatchToProps(dispatch) {
   return {
-    onAuth: bindActionCreators(actions.auth, dispatch)
+    onAuth: bindActionCreators(actions.auth, dispatch),
+    onPlay: bindActionCreators(actions.playTrack, dispatch)
   }
 }
 

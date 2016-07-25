@@ -1,15 +1,22 @@
 module.exports = {
   entry: [
-      'webpack-dev-server/client?http://localhost:8080',
-      'webpack/hot/only-dev-server',
-      './src/index.js'
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    './src/index.js'
   ],
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'react-hot!babel'
-    }]
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'react-hot!babel'
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loaders: ['babel-loader', 'eslint-loader']
+      }
+    ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -23,5 +30,8 @@ module.exports = {
     contentBase: './dist',
     hot: true,
     historyApiFallback: true
+  },
+  eslint: {
+    config: './.eslintrc'
   }
 };

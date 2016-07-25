@@ -5,5 +5,5 @@ import { playTrack, setTracks } from './track';
 export {
   auth,
   setTracks,
-  playTrack
+  playTrack,
 };

@@ -1,6 +1,5 @@
-import React from "react";
 import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import Stream from './presenter';
 
@@ -11,17 +10,17 @@ function mapStateToProps(state) {
   return {
     user,
     tracks,
-    activeTrack
+    activeTrack,
   };
 }
 
-//With this we pass actions to our presenter component
-//In this case we bind the action auth with the prop function onAuth
+// With this we pass actions to our presenter component
+// In this case we bind the action auth with the prop function onAuth
 function mapDispatchToProps(dispatch) {
   return {
     onAuth: bindActionCreators(actions.auth, dispatch),
-    onPlay: bindActionCreators(actions.playTrack, dispatch)
-  }
+    onPlay: bindActionCreators(actions.playTrack, dispatch),
+  };
 }
 
 // The connect method subscribe to the redux store updates

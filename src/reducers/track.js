@@ -2,21 +2,8 @@ import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
   tracks: [],
-  activeTrack: null
+  activeTrack: null,
 };
-
-export default function (state = initialState, action) {
-  // The reducer checks if it should act based on the action type
-  switch (action.type) {
-    case actionTypes.TRACKS_SET:
-      return setTracks(state, action);
-    case actionTypes.TRACK_PLAY:
-      return setPlay(state, action);
-  }
-
-  // If the reducer doesn't have an operation of this action type it should always return the state given
-  return state;
-}
 
 function setTracks(state, action) {
   // This is the same as var tracks = action.tracks;
@@ -32,4 +19,18 @@ function setTracks(state, action) {
 function setPlay(state, action) {
   const { track } = action;
   return { ...state, activeTrack: track };
+}
+
+export default function (state = initialState, action) {
+  // The reducer checks if it should act based on the action type
+  switch (action.type) {
+    case actionTypes.TRACKS_SET:
+      return setTracks(state, action);
+    case actionTypes.TRACK_PLAY:
+      return setPlay(state, action);
+    default:
+  }
+
+  // If the reducer doesn't have an operation of this action type it should always return the state given
+  return state;
 }

@@ -7,7 +7,7 @@ class Callback extends React.Component {
   }
 
   render() {
-    return <div><p>This page should close soon.</p></div>
+    return <div><p>This page should close soon.</p></div>;
   }
 
 }

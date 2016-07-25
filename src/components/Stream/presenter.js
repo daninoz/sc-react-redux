@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { CLIENT_ID } from "../../constants/auth";
+import { CLIENT_ID } from '../../constants/auth';
 
 /*
  Stream is an stateless function because it receives an input
@@ -27,38 +27,44 @@ class Stream extends Component {
     const { user, tracks = [], activeTrack, onAuth, onPlay } = this.props;
 
     return (
+      <div>
         <div>
-          <div>
-            {
-              // If the user is present we display the username
-              // If not we display a login button
-              user ?
-                  <div>{ user.username }</div> :
-                  <button onClick={onAuth} type="button">Login</button>
-            }
-          </div>
-          <br />
-          <div>
-            {
-              tracks.map((track, key) => {
-                // List of components should have a unique key
-                return (
-                    <div className="track" key={key}>
-                      {track.origin.title}
-                      <button type="button" onClick={() => onPlay(track)}>Play</button>
-                    </div>
-                )
-              })
-            }
-          </div>
           {
-            activeTrack ?
-                <audio id="audio" ref="audio" src={`${activeTrack.origin.stream_url}?client_id=${CLIENT_ID}`}></audio> :
-                null
+            // If the user is present we display the username
+            // If not we display a login button
+            user ?
+              <div>{user.username}</div> :
+              <button onClick={onAuth} type="button">Login</button>
           }
         </div>
+        <br />
+        <div>
+          {
+            tracks.map((track, key) =>
+              // List of components should have a unique key
+              <div className="track" key={key}>
+                {track.origin.title}
+                <button type="button" onClick={() => onPlay(track)}>Play</button>
+              </div>
+            )
+          }
+        </div>
+        {
+          activeTrack ?
+            <audio id="audio" ref="audio" src={`${activeTrack.origin.stream_url}?client_id=${CLIENT_ID}`}></audio> :
+            null
+        }
+      </div>
     );
   }
 }
+
+Stream.propTypes = {
+  activeTrack: React.PropTypes.object,
+  user: React.PropTypes.object,
+  tracks: React.PropTypes.array,
+  onAuth: React.PropTypes.func.isRequired,
+  onPlay: React.PropTypes.func.isRequired,
+};
 
 export default Stream;
